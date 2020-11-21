@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fithive map</title>
+
+
+  <style>
+    #map{
+      height:400px;
+      width:100%;
+    }
+  </style>
+<!-- background color use Hex, RGB, or crayola -->
+  <style>
+body {
+  background-color: #4D4D4D;
+
+}
+</style>
+<!-- Menu on the top right and button info -->
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #4D4D4D;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: orange;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+
+</body>
+</head>
+<body>
+  <h1 style="color:orange;">Fithive Map</h1>
+  <style>
+h1 {
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+</style>
+  <div id="map"></div>
+  <script>
+
+    function initMap(){
+      // Map options
+      var options = {
+        zoom:6,
+        center:{lat:34.0522,lng:-118.2437}
+      }
+
+      // New map
+      var map = new google.maps.Map(document.getElementById('map'), options);
+
+      // Listen for click on map
+      google.maps.event.addListener(map, 'click', function(event){
+        // Add marker
+        addMarker({coords:event.latLng});
+      });
+
+      /*
+      // Add marker
+      var marker = new google.maps.Marker({
+        position:{lat:42.4668,lng:-70.9495},
+        map:map,
+        icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content:'<h1>Lynn MA</h1>'
+      });
+
+      marker.addListener('click', function(){
+        infoWindow.open(map, marker);
+      });
+      */
+
+      // Array of markers
+      var markers = [
+        {
+          coords:{lat:34.001128,lng:-118.244422},
+          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          content:'<h1>Edgars Childhood Home</h1>'
+        },
+        {
+          coords:{lat:47.138403,lng:-122.632009},
+          content:'<h1>Solo Point Hike </h1>'
+        },
+        {
+
+        }
+      ];
+
+      // Loop through markers
+      for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+      }
+
+      // Add Marker Function
+      function addMarker(props){
+        var marker = new google.maps.Marker({
+          position:props.coords,
+          map:map,
+          //icon:props.iconImage
+        });
+
+        // Check for customicon
+        if(props.iconImage){
+          // Set icon image
+          marker.setIcon(props.iconImage);
+        }
+
+        // Check content
+        if(props.content){
+          var infoWindow = new google.maps.InfoWindow({
+            content:props.content
+          });
+
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
+        }
+      }
+    }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-01tuOhL16DTSOPbrg2FpCcUtpQ0m3p8&callback=initMap">
+    </script>
+	<style>
+
+.dropbtn {
+  background-color: #f58d42; <!-- Dropdown Button Style -->
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #f0d681;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
+</head>
+<body>
+
+<h2 style="color:orange;">View Explorers</h2> <!-- Header 2 -->
+<p>Click on the button to open the dropdown menu.</p>
+
+<div class="Members">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href=".button1">Michael</a>
+    <a href=".button2">Edgar</a>
+
+  </div>
+</div>
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+
+
+    <style>
+</body>
+</html>
